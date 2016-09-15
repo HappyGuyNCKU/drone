@@ -1,0 +1,20 @@
+<launch>
+	
+  <!--arg name="manager" /--> <!-- Must be globally qualified -->
+  <arg name="respawn" default="false" />
+  <arg name="left" default="left" />
+  <arg name="right" default="right" />
+
+  <node pkg="nodelet" type="nodelet" name="standalone_nodelet" args="manager"/>
+
+  <node pkg="nodelet" type="nodelet" name="my_cam"
+        args="load  uvc_camera/StereoNodelet standalone_nodelet"
+		respawn="$(arg respawn)" >
+    <param name="left/device" value="/dev/video1"/>
+    <param name="right/device" value="/dev/video0"/>
+    <param name="width" value="320" />
+    <param name="height" value="240" />
+
+  </node>
+
+</launch>
