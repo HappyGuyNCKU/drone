@@ -5,16 +5,17 @@
   <arg name="left" default="left" />
   <arg name="right" default="right" />
 
-  <arg name="manager" default="nodelet_manager"/>
+  <arg name="manager" default="/nodelet_manager"/>
 
   <arg     if="$(arg respawn)" name="bond" value="" />
   <arg unless="$(arg respawn)" name="bond" value="--no-bond" />
 
-<group ns="stereo">
   <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager" />
 
+<group ns="stereo">
+
   <node pkg="nodelet" type="nodelet" name="my_cam"
-        args="load  uvc_camera/StereoNodelet nodelet_manager"
+        args="load  uvc_camera/StereoNodelet $(arg manager)" 
 		respawn="$(arg respawn)" output="screen">
     <param name="left/device" value="/dev/video1"/>
     <param name="right/device" value="/dev/video0"/>
@@ -22,17 +23,17 @@
     <param name="height" value="240" />
   </node>
  
-  <group ns="left">
+
    	<!-- Debayered images -->
-  	<node pkg="nodelet" type="nodelet" name="debayer"
+  	<node pkg="nodelet" type="nodelet" name="debayer" ns="left"
           args="load image_proc/debayer $(arg manager) $(arg bond)"
           respawn="$(arg respawn)" output="screen"/>
 
   	<!-- Monochrome rectified image -->
-  	<node pkg="nodelet" type="nodelet" name="rectify_mono"
+  	<node pkg="nodelet" type="nodelet" name="rectify_mono" ns="left"
           args="load image_proc/rectify $(arg manager) $(arg bond)"
           respawn="$(arg respawn)" output="screen"/>
-  </group>
+  
 
   <group ns="right" >
     <!-- Debayered images -->
