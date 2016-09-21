@@ -22,7 +22,7 @@
     <param name="height" value="240" />
   </node>
     
-  <include file="$(find image_proc)/launch/image_proc.launch"
+  <!--include file="$(find image_proc)/launch/image_proc.launch"
 	   ns="$(arg left)">
     <arg name="manager" value="$(arg manager)" />
     <arg name="respawn" value="$(arg respawn)" />
@@ -36,7 +36,7 @@
 
   <node pkg="nodelet" type="nodelet" name="disparity"
         args="load stereo_image_proc/disparity $(arg manager) $(arg bond)"
-	respawn="$(arg respawn)" />
+	respawn="$(arg respawn)" /-->
 
 </group>
 </launch>
