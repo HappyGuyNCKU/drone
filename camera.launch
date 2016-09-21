@@ -11,11 +11,11 @@
   <arg unless="$(arg respawn)" name="bond" value="--no-bond" />
 
 <group ns="stereo">
-  <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager"/>
+  <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager" />
 
   <node pkg="nodelet" type="nodelet" name="my_cam"
         args="load  uvc_camera/StereoNodelet nodelet_manager"
-		respawn="$(arg respawn)" >
+		respawn="$(arg respawn)" output="screen" >
     <param name="left/device" value="/dev/video1"/>
     <param name="right/device" value="/dev/video0"/>
     <param name="width" value="320" />
