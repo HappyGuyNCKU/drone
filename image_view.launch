@@ -1,0 +1,11 @@
+<launch>
+	
+	<node pkg="image_view" type="image_view" name="image_view" >
+		<remap from="image" to="/stereo/left/image_raw" />
+	</node>
+
+	<node pkg="image_view" type="disparity_view_gray_scale" name="disparity_view"  >
+		<remap from="image" to="/stereo/disparity" />
+	</node>
+
+</launch>
