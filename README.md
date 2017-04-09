@@ -15,6 +15,29 @@ Bare version is enough to proceed.<br/>
 
 2. Setup Workspace
 
+Setting up the ROS environment on the computer following  http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment
+
+ps.Inside the tutorial use catkin_make ultility.But we used to use catkin tools,which provides much more feature and easy to use.
+To install catkin tools
+```
+sudo apt-get install python-catkin-tools
+```
+
+3. Setup camera node
+
+```
+$ cd $CATKIN_WS/src
+$ git clone https://github.com/ktossell/camera_umd
+
+# jpeg_streamer package is useless to us.Put it into blacklist
+$ catkin config --blacklist  jpeg_streamer
+
+# build workspace
+$ catkin build
+
+# Test
+
+```
 
 
 2. Install required image_pipeline packages
